@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clarish Adlawan Villarin — Virtual Assistant Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#0B1E3D;
+    --navy-700:#1F3864;
+    --navy-600:#2A4A80;
+    --slate-500:#5B6472;
+    --slate-300:#AEB4BE;
+    --slate-200:#E2E5EA;
+    --paper:#F5F6F8;
+    --white:#FFFFFF;
+    --brass:#B8925A;
+    --brass-light:#E8D9C2;
+    --shadow: 0 20px 40px -20px rgba(11,30,61,0.25);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--navy-900);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; color:var(--navy-900); font-weight:600; letter-spacing:-0.01em;}
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--brass);}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,246,248,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--slate-200);
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mark{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--navy-900); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:600; font-size:15px;
+  }
+  .nav-links{display:flex; gap:30px; font-size:14px; font-weight:500; color:var(--navy-700);}
+  .nav-links a{position:relative; padding:4px 0;}
+  .nav-links a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--brass); transition:width .25s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--navy-900); color:var(--white); padding:10px 20px;
+    border-radius:3px; font-size:13.5px; font-weight:600;
+    font-family:'IBM Plex Mono', monospace; letter-spacing:0.03em;
+  }
+  @media(max-width:720px){ .nav-links{display:none;} }
+
+  /* HERO */
+  header.hero{
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--slate-200);
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; top:-120px; right:-160px;
+    width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(31,56,100,0.10), transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:1;}
+  .hero h1{
+    font-size:clamp(38px, 6vw, 60px);
+    line-height:1.05;
+    margin:18px 0 6px;
+  }
+  .hero .role-strip{
+    font-size:18px; color:var(--navy-700); font-weight:500; margin-bottom:22px;
+  }
+  .hero .role-strip .sep{color:var(--brass); margin:0 8px;}
+  .hero p.lede{
+    max-width:600px; font-size:17px; color:var(--slate-500); margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--navy-900); color:var(--white); padding:14px 26px;
+    border-radius:3px; font-weight:600; font-size:14.5px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .btn-primary:hover{background:var(--navy-700); transform:translateY(-1px);}
+  .btn-secondary{
+    border:1px solid var(--navy-900); color:var(--navy-900); padding:13px 26px;
+    border-radius:3px; font-weight:600; font-size:14.5px;
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn-secondary:hover{background:var(--navy-900); color:var(--white);}
+
+  .hero-meta{
+    display:flex; gap:36px; margin-top:56px; flex-wrap:wrap;
+    padding-top:32px; border-top:1px solid var(--slate-200);
+  }
+  .hero-meta div{max-width:220px;}
+  .hero-meta .num{font-family:'Fraunces', serif; font-size:26px; color:var(--navy-900); font-weight:600;}
+  .hero-meta .label{font-size:13px; color:var(--slate-500); margin-top:2px;}
+
+  section{padding:80px 0;}
+  section.alt{background:var(--white); border-top:1px solid var(--slate-200); border-bottom:1px solid var(--slate-200);}
+  .section-head{margin-bottom:44px; max-width:640px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,36px); margin-top:12px;}
+  .section-head p{color:var(--slate-500); margin-top:12px; font-size:15.5px;}
+
+  /* TRANSLATION TABLE (signature) */
+  .translate-table{
+    border:1px solid var(--slate-200); border-radius:6px; overflow:hidden; background:var(--white);
+  }
+  .t-row{
+    display:grid; grid-template-columns:1fr 40px 1fr;
+    border-top:1px solid var(--slate-200);
+    align-items:stretch;
+  }
+  .t-row:first-child{border-top:none;}
+  .t-row .t-head{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--slate-500); padding:16px 24px; background:var(--paper);
+  }
+  .t-cell{padding:20px 24px; font-size:15px; color:var(--navy-900);}
+  .t-cell.right{color:var(--navy-700); font-weight:500;}
+  .t-arrow{
+    display:flex; align-items:center; justify-content:center;
+    color:var(--brass); font-size:18px; background:var(--paper);
+  }
+  @media(max-width:680px){
+    .t-row{grid-template-columns:1fr; }
+    .t-arrow{display:none;}
+  }
+
+  /* SERVICES */
+  .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media(max-width:840px){.cards3{grid-template-columns:1fr;}}
+  .card{
+    background:var(--white); border:1px solid var(--slate-200); border-radius:8px;
+    padding:30px 26px; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .card .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--brass); font-weight:500;
+  }
+  .card h3{font-size:21px; margin:10px 0 14px;}
+  .card ul{list-style:none;}
+  .card li{
+    font-size:14.5px; color:var(--slate-500); padding-left:18px; position:relative; margin-bottom:9px;
+  }
+  .card li::before{content:"—"; position:absolute; left:0; color:var(--brass);}
+
+  /* SKILLS */
+  .tag-grid{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag-pill{
+    border:1px solid var(--slate-200); background:var(--white); color:var(--navy-700);
+    font-size:13.5px; padding:9px 16px; border-radius:20px; font-weight:500;
+  }
+
+  /* SAMPLES */
+  .samples-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  @media(max-width:840px){.samples-grid{grid-template-columns:1fr;}}
+  .sample{
+    background:var(--white); border:1px solid var(--slate-200); border-radius:8px; overflow:hidden;
+  }
+  .sample-bar{
+    background:var(--navy-900); color:var(--white); padding:12px 18px;
+    display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px;
+  }
+  .dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3);}
+  .sample-body{padding:20px;}
+  .sample-label{
+    font-size:11px; font-family:'IBM Plex Mono', monospace; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--brass); margin-bottom:6px; display:block;
+  }
+  .sample h4{font-family:'Fraunces', serif; font-size:17px; margin-bottom:12px; color:var(--navy-900);}
+  .mini-table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  .mini-table th{
+    text-align:left; font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--slate-500); padding:6px 8px; border-bottom:1px solid var(--slate-200);
+  }
+  .mini-table td{padding:8px; border-bottom:1px solid var(--slate-200); color:var(--navy-900); vertical-align:top;}
+  .pri{font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:10px; display:inline-block;}
+  .pri.high{background:#FBE7E4; color:#B23B2E;}
+  .pri.med{background:#FDF1DE; color:#A6741A;}
+  .pri.low{background:#E7EEE3; color:#3E7A46;}
+  .checklist{list-style:none; font-size:13.5px;}
+  .checklist li{padding:7px 0; border-bottom:1px dashed var(--slate-200); display:flex; gap:10px; color:var(--navy-900);}
+  .checklist li:last-child{border-bottom:none;}
+  .checklist .chk{width:15px; height:15px; border:1.5px solid var(--navy-700); border-radius:3px; flex-shrink:0; margin-top:2px; position:relative;}
+  .checklist .chk.done::after{content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--navy-700); font-weight:700;}
+  .minutes p{font-size:13px; color:var(--slate-500); margin-bottom:8px;}
+  .minutes .m-title{color:var(--navy-900); font-weight:600; font-size:13px;}
+  .cal-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:6px; font-size:11px;}
+  .cal-day{background:var(--paper); border:1px solid var(--slate-200); border-radius:5px; padding:8px 6px; min-height:64px;}
+  .cal-day .d{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--slate-500); margin-bottom:4px;}
+  .cal-day .p{font-size:10.5px; color:var(--navy-700); font-weight:500;}
+
+  /* EXPERIENCE */
+  .timeline{border-left:2px solid var(--slate-200); padding-left:30px; margin-left:6px;}
+  .t-item{position:relative; padding-bottom:36px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:""; position:absolute; left:-36px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--white); border:2.5px solid var(--brass);
+  }
+  .t-item .role-line{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:4px;}
+  .t-item h4{font-family:'Fraunces', serif; font-size:18px; color:var(--navy-900);}
+  .t-item .dates{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--slate-500);}
+  .t-item .org{color:var(--brass); font-size:13.5px; font-weight:500; margin-bottom:10px;}
+  .t-item p{font-size:14.5px; color:var(--slate-500); max-width:600px;}
+
+  /* EDUCATION */
+  .edu-card{
+    background:var(--white); border:1px solid var(--slate-200); border-radius:8px; padding:26px 28px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+  }
+  .edu-card h4{font-family:'Fraunces', serif; font-size:19px;}
+  .edu-card .org{color:var(--slate-500); font-size:14px; margin-top:4px;}
+  .badge{
+    background:var(--navy-900); color:var(--white); font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; padding:8px 14px; border-radius:20px; letter-spacing:0.03em;
+  }
+
+  /* CONTACT */
+  footer{
+    background:var(--navy-900); color:var(--white); padding:80px 0 40px;
+  }
+  footer .eyebrow{color:var(--brass);}
+  footer .eyebrow::before{background:var(--brass);}
+  footer h2{color:var(--white); font-size:clamp(28px,3.6vw,42px); margin:14px 0 18px;}
+  footer p.lede{color:var(--slate-300); max-width:520px; margin-bottom:36px; font-size:15.5px;}
+  .contact-grid{display:flex; gap:40px; flex-wrap:wrap; margin-bottom:56px;}
+  .contact-item .label{font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass); margin-bottom:6px;}
+  .contact-item a, .contact-item span{color:var(--white); font-size:15px; font-weight:500;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.15); padding-top:24px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-size:12.5px; color:var(--slate-300);
+  }
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="mark">CV</div>
+      <span class="mono" style="font-size:13px; color:var(--navy-700); font-weight:500;">Clarish Villarin</span>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#skills">Skills</a>
+      <a href="#samples">Work Samples</a>
+      <a href="#experience">Experience</a>
+    </div>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Virtual Assistant · Based in Cebu, Philippines</div>
+    <h1>Clarish Adlawan<br>Villarin</h1>
+    <div class="role-strip">General VA <span class="sep">·</span> Executive VA <span class="sep">·</span> Construction VA</div>
+    <p class="lede">I bring the discipline of a registrar's office and the precision of a construction safety desk to your inbox, calendar, and files — so nothing slips, and nothing waits on you to chase it.</p>
+    <div class="hero-actions">
+      <a href="mailto:adlawanclarish102@gmail.com" class="btn-primary">Email Me →</a>
+      <a href="https://www.linkedin.com/in/clarish-adlawan" target="_blank" class="btn-secondary">View LinkedIn</a>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <div class="num">3</div>
+        <div class="label">Industries worked in — education, heavy manufacturing, construction</div>
+      </div>
+      <div>
+        <div class="num">LPT</div>
+        <div class="label">Licensed Professional Teacher — trained to communicate clearly and precisely</div>
+      </div>
+      <div>
+        <div class="num">2</div>
+        <div class="label">Languages — English & Filipino, fluent written and spoken</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">From the Field to Your Inbox</div>
+      <h2>Real work experience, translated for remote support.</h2>
+      <p>I haven't worked remotely yet — but I've spent every role so far being the person who keeps records straight, deadlines met, and people informed. That's the same job, just done from a laptop instead of a front desk or a job site.</p>
+    </div>
+    <div class="translate-table">
+      <div class="t-row">
+        <div class="t-head">On the ground</div>
+        <div class="t-arrow"></div>
+        <div class="t-head">For you, virtually</div>
+      </div>
+      <div class="t-row">
+        <div class="t-cell">Managed confidential student records and enrollment files as a College Registrar</div>
+        <div class="t-arrow">→</div>
+        <div class="t-cell right">Handles sensitive data entry, CRM updates, and document management with zero-error discretion</div>
+      </div>
+      <div class="t-row">
+        <div class="t-cell">Filed daily safety and compliance reports against strict deadlines</div>
+        <div class="t-arrow">→</div>
+        <div class="t-cell right">Delivers reports, meeting notes, and documentation on time, every time</div>
+      </div>
+      <div class="t-row">
+        <div class="t-cell">Coordinated schedules between site teams, contractors, and vendors</div>
+        <div class="t-arrow">→</div>
+        <div class="t-cell right">Manages your calendar, meeting logistics, and vendor follow-ups end to end</div>
+      </div>
+      <div class="t-row">
+        <div class="t-cell">Answered daily inquiries from students, parents, and faculty</div>
+        <div class="t-arrow">→</div>
+        <div class="t-cell right">Handles your inbox and client-facing correspondence professionally</div>
+      </div>
+      <div class="t-row">
+        <div class="t-cell">Conducted site inspections and flagged issues before they escalated</div>
+        <div class="t-arrow">→</div>
+        <div class="t-cell right">Catches the small details before they become your problem</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Services</div>
+      <h2>Where I can take work off your plate</h2>
+      <p>Three lanes I support — pick one, or mix and match depending on what your week looks like.</p>
+    </div>
+    <div class="cards3">
+      <div class="card reveal">
+        <div class="tag">General VA</div>
+        <h3>Day-to-day admin</h3>
+        <ul>
+          <li>Inbox management & email triage</li>
+          <li>Calendar & appointment scheduling</li>
+          <li>Data entry & records organization</li>
+          <li>Online research & document prep</li>
+          <li>File organization (Drive, Dropbox)</li>
+          <li>Customer/client correspondence</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <div class="tag">Executive VA</div>
+        <h3>Leadership support</h3>
+        <ul>
+          <li>Calendar & meeting coordination</li>
+          <li>Meeting minutes & action-item tracking</li>
+          <li>Confidential document handling</li>
+          <li>Correspondence drafting & follow-up</li>
+          <li>Deadline & task tracking</li>
+          <li>Presentation support (Canva/PowerPoint)</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <div class="tag">Construction VA</div>
+        <h3>Site & compliance support</h3>
+        <ul>
+          <li>Permit & compliance document tracking</li>
+          <li>Safety report formatting & filing</li>
+          <li>Subcontractor & vendor coordination</li>
+          <li>Site schedule & inspection logs</li>
+          <li>RFI / submittal log organization</li>
+          <li>Toolbox talk & incident documentation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Skills & Tools</div>
+      <h2>What I work in</h2>
+    </div>
+    <div class="tag-grid reveal">
+      <span class="tag-pill">MS Word</span>
+      <span class="tag-pill">MS Excel</span>
+      <span class="tag-pill">MS PowerPoint</span>
+      <span class="tag-pill">MS Outlook</span>
+      <span class="tag-pill">Google Docs</span>
+      <span class="tag-pill">Google Sheets</span>
+      <span class="tag-pill">Google Drive</span>
+      <span class="tag-pill">Google Calendar</span>
+      <span class="tag-pill">Canva</span>
+      <span class="tag-pill">Data Entry</span>
+      <span class="tag-pill">Calendar Management</span>
+      <span class="tag-pill">Email Management</span>
+      <span class="tag-pill">Records Management</span>
+      <span class="tag-pill">Compliance Documentation</span>
+      <span class="tag-pill">Report Writing</span>
+      <span class="tag-pill">Scheduling & Coordination</span>
+      <span class="tag-pill">Confidentiality</span>
+      <span class="tag-pill">Time Management</span>
+      <span class="tag-pill">English/Filipino Bilingual</span>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="samples">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Work Samples</div>
+      <h2>How I'd handle it, in practice</h2>
+      <p>I don't have client files to share yet, so here are sample deliverables I put together myself to show exactly how I'd organize your inbox, meetings, and site paperwork.</p>
+    </div>
+    <div class="samples-grid">
+
+      <div class="sample reveal">
+        <div class="sample-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div>&nbsp;&nbsp;inbox-triage.xlsx</div>
+        <div class="sample-body">
+          <span class="sample-label">Sample — Executive Inbox Triage</span>
+          <h4>Daily inbox sort</h4>
+          <table class="mini-table">
+            <tr><th>From</th><th>Subject</th><th>Priority</th><th>Action</th></tr>
+            <tr><td>Supplier — J. Reyes</td><td>Invoice #2216 overdue</td><td><span class="pri high">High</span></td><td>Flag for approval today</td></tr>
+            <tr><td>Board Member</td><td>Re: Q3 meeting agenda</td><td><span class="pri med">Med</span></td><td>Confirm by Thu</td></tr>
+            <tr><td>Newsletter</td><td>Industry roundup</td><td><span class="pri low">Low</span></td><td>Archive</td></tr>
+            <tr><td>Client — M. Tan</td><td>Contract question</td><td><span class="pri high">High</span></td><td>Draft reply, CC you</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="sample reveal">
+        <div class="sample-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div>&nbsp;&nbsp;meeting-minutes.docx</div>
+        <div class="sample-body">
+          <span class="sample-label">Sample — Executive Meeting Minutes</span>
+          <h4>Leadership sync — recap</h4>
+          <div class="minutes">
+            <p class="m-title">Attendees</p>
+            <p>CEO, Ops Lead, Finance Lead</p>
+            <p class="m-title">Decisions</p>
+            <p>Approved Q3 vendor renewal; hold on new hire until budget review</p>
+            <p class="m-title">Action Items</p>
+            <p>→ Finance to send updated budget by Fri (Owner: Finance Lead)<br>
+               → VA to schedule follow-up for Oct 3 (Owner: Clarish)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sample reveal">
+        <div class="sample-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div>&nbsp;&nbsp;site-compliance-checklist.pdf</div>
+        <div class="sample-body">
+          <span class="sample-label">Sample — Construction Site Checklist</span>
+          <h4>Weekly compliance log</h4>
+          <ul class="checklist">
+            <li><span class="chk done"></span> Toolbox talk records filed</li>
+            <li><span class="chk done"></span> PPE inspection log updated</li>
+            <li><span class="chk done"></span> Subcontractor permits on file</li>
+            <li><span class="chk"></span> Incident report — pending signature</li>
+            <li><span class="chk"></span> Vendor insurance cert — expires in 12 days</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sample reveal">
+        <div class="sample-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div>&nbsp;&nbsp;content-calendar.canva</div>
+        <div class="sample-body">
+          <span class="sample-label">Sample — Content Calendar (Canva)</span>
+          <h4>Weekly posting plan</h4>
+          <div class="cal-grid">
+            <div class="cal-day"><div class="d">MON</div><div class="p">Company update</div></div>
+            <div class="cal-day"><div class="d">TUE</div><div class="p">—</div></div>
+            <div class="cal-day"><div class="d">WED</div><div class="p">Client spotlight</div></div>
+            <div class="cal-day"><div class="d">THU</div><div class="p">—</div></div>
+            <div class="cal-day"><div class="d">FRI</div><div class="p">Weekly recap</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Experience</div>
+      <h2>Where this all comes from</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <div class="role-line">
+          <h4>Safety Officer (Project-Based)</h4>
+          <div class="dates">Sept 2025 – Feb 2026</div>
+        </div>
+        <div class="org">Global Machinery Industrial Solutions Corp.</div>
+        <p>Owned safety documentation, site inspections, and compliance coordination across contractors, vendors, and regulators for an active construction project.</p>
+      </div>
+      <div class="t-item">
+        <div class="role-line">
+          <h4>Safety Officer (Reliever)</h4>
+          <div class="dates">2025 · 3 months</div>
+        </div>
+        <div class="org">ISO-Certified Rebar Manufacturing Company</div>
+        <p>Maintained ISO-compliant safety and quality documentation, supporting internal audits and floor-level compliance reporting.</p>
+      </div>
+      <div class="t-item">
+        <div class="role-line">
+          <h4>College Registrar (Reliever)</h4>
+          <div class="dates">Jan 2024 – Aug 2024</div>
+        </div>
+        <div class="org">Rizwoods Colleges, Inc.</div>
+        <p>Managed enrollment records and academic files, handled front-desk correspondence, and kept registrar workflows on schedule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Education</div>
+      <h2>Background</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div>
+        <h4>Bachelor in Secondary Education, Major in English</h4>
+        <div class="org">Professional Academy of the Philippines</div>
+      </div>
+      <div class="badge">Licensed Professional Teacher</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2>Let's get your inbox under control.</h2>
+    <p class="lede">Open to full-time and part-time remote roles as a General, Executive, or Construction VA. I reply within a day.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="label">Email</div>
+        <a href="mailto:adlawanclarish102@gmail.com">adlawanclarish102@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="label">Phone</div>
+        <span>0961-867-8348</span>
+      </div>
+      <div class="contact-item">
+        <div class="label">Location</div>
+        <span>Cebu, Philippines</span>
+      </div>
+      <div class="contact-item">
+        <div class="label">LinkedIn</div>
+        <a href="https://www.linkedin.com/in/clarish-adlawan" target="_blank">/in/clarish-adlawan</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Clarish Adlawan Villarin</span>
+      <span>General VA · Executive VA · Construction VA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
